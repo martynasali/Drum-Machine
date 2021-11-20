@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
+import './index.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 
@@ -54,9 +55,29 @@ function App() {
           :
           <h3>LOADING</h3>}</div>
       <h1>labs vakar</h1>
-      <button onClick={start}>Play</button>
+      <button onClick={start} >Play</button>
+      <p>
+      <input type="checkbox" name="vehicle1" value="Bike"/>
+      <input type="checkbox" name="vehicle1" value="Bike"/>
+      <input type="checkbox" name="vehicle1" value="Bike"/>
+      <input type="checkbox" name="vehicle1" value="Bike"/>
+      <input type="checkbox" name="vehicle1" value="Bike"/>
+      <input type="checkbox" name="vehicle1" value="Bike"/>
+      <input type="checkbox" name="vehicle1" value="Bike"/>
+      <input type="checkbox" name="vehicle1" value="Bike"/>
+      <input type="checkbox" name="vehicle1" value="Bike"/>
+      <input type="checkbox" name="vehicle1" value="Bike"/>
+      <input type="checkbox" name="vehicle1" value="Bike"/>
+      <input type="checkbox" name="vehicle1" value="Bike"/>
+      <input type="checkbox" name="vehicle1" value="Bike"/>
+      <input type="checkbox" name="vehicle1" value="Bike"/>
+      <input type="checkbox" name="vehicle1" value="Bike"/>
+      <input type="checkbox" name="vehicle1" value="Bike"/>
+      </p>
       <button onClick={stop}>Stop</button>
       <Profile/>
+   
+
       </header>
     </div>
   );
