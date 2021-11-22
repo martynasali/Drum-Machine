@@ -4,15 +4,7 @@ import './index.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
 
-function Profile ()
-{
-  return(
-    <img
-    src="https://i.imgur.com/MK3eW3As.jpg"
-    alt="Katherine Johnson"
-    />
-  )
-}
+
 // create Oscillator node
 // create web audio api context
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -32,10 +24,24 @@ function stop(){
 }
 
 
-function App() {
 
+
+
+function App() {
+  const buttonClass = "h-15 p-6 w-15 rounded-lg bg-gray-200 border-2 border-border-gray-500 border-opacity-100 hover:border-purple-500 shadow-xl";
+  const buttonClassSlected = "h-15 p-6 w-15 rounded-lg bg-gray-400 border-2 border-border-gray-500 border-opacity-100 hover:border-purple-500 shadow-xl";
+  const [btnClass, setBtnClass] = useState(buttonClass)
   const [getMessage, setGetMessage] = useState({})
 
+
+
+
+
+  function setClass () {
+    
+    setBtnClass(buttonClassSlected)
+  }
+  
   useEffect(()=>{
     axios.get('http://localhost:5000/flask/hello').then(response => {
       console.log("SUCCESS", response)
@@ -45,42 +51,37 @@ function App() {
     })
 
   }, [])
+  let buttons = []
+    for (let i = 0; i < 16; i++) {    
+    buttons.push(<div class={btnClass} onClick={()=>{
+      setClass(buttonClassSlected)}}></div>)
+      }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>React + Flask Tutorial</p>
-        <div>{getMessage.status === 200 ? 
-          <h3>{getMessage.data.message}</h3>
-          :
-          <h3>LOADING</h3>}</div>
-      <h1>labs vakar</h1>
-      <button onClick={start} >Play</button>
-      <p>
-      <input type="checkbox" name="vehicle1" value="Bike"/>
-      <input type="checkbox" name="vehicle1" value="Bike"/>
-      <input type="checkbox" name="vehicle1" value="Bike"/>
-      <input type="checkbox" name="vehicle1" value="Bike"/>
-      <input type="checkbox" name="vehicle1" value="Bike"/>
-      <input type="checkbox" name="vehicle1" value="Bike"/>
-      <input type="checkbox" name="vehicle1" value="Bike"/>
-      <input type="checkbox" name="vehicle1" value="Bike"/>
-      <input type="checkbox" name="vehicle1" value="Bike"/>
-      <input type="checkbox" name="vehicle1" value="Bike"/>
-      <input type="checkbox" name="vehicle1" value="Bike"/>
-      <input type="checkbox" name="vehicle1" value="Bike"/>
-      <input type="checkbox" name="vehicle1" value="Bike"/>
-      <input type="checkbox" name="vehicle1" value="Bike"/>
-      <input type="checkbox" name="vehicle1" value="Bike"/>
-      <input type="checkbox" name="vehicle1" value="Bike"/>
-      </p>
-      <button onClick={stop}>Stop</button>
-      <Profile/>
+    <div class="inline-flex space-x-2">
+  
+    {buttons.map(butt=><div class="flex-1">{butt}</div>)}
+</div>
+
+)
+  
+
+  // return (
+  //   <div className="App">
+  //       <p>React + Flask Tutorial</p>
+  //       <div>{getMessage.status === 200 ? 
+  //         <h3>{getMessage.data.message}</h3>
+  //         : <h3>LOADING</h3>}</div>
+
+  //  <div class={btnClass} onClick={()=>{
+  //    setClass(buttonClassSlected)
+
+  //  }}></div>
+  //  <div class={btnClass}></div>
    
 
-      </header>
-    </div>
-  );
+  //   </div>
+  // );
 }
 
 export default App;
