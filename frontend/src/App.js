@@ -28,8 +28,8 @@ function stop(){
 
 
 function App() {
-  const buttonClass = "h-15 p-6 w-15 rounded-lg bg-gray-200 border-2 border-border-gray-500 border-opacity-100 hover:border-purple-500 shadow-xl";
-  const buttonClassSlected = "h-15 p-6 w-15 rounded-lg bg-gray-400 border-2 border-border-gray-500 border-opacity-100 hover:border-purple-500 shadow-xl";
+  const buttonClass = "h-8 p-6 w-8 rounded-lg bg-gray-200 border-2 border-border-gray-500 border-opacity-100 hover:border-purple-500 hover:bg-indigo-800 shadow-xl";
+  const buttonClassSlected = "h-8 p-6 w-8 rounded-lg bg-gray-300 border-2 border-border-gray-500 border-opacity-100 hover:border-purple-500 shadow-xl";
   const [btnClass, setBtnClass] = useState(buttonClass)
   const [getMessage, setGetMessage] = useState({})
 
@@ -58,9 +58,19 @@ function App() {
       }
 
   return (
-    <div class="inline-flex space-x-2">
+
+    <div className="container grid grid-cols-3 gap-4  mx-auto">
+    <div className="h-48"></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+
+    <div className="inline-flex space-x-2">
   
     {buttons.map(butt=><div class="flex-1">{butt}</div>)}
+</div>
 </div>
 
 )
