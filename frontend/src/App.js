@@ -3,6 +3,7 @@ import './App.css';
 import './index.css';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios'
+import SoundButton from './SoundButton';
 
 
 // create Oscillator node
@@ -58,21 +59,19 @@ function App() {
       }
 
   return (
-
-    <div className="container grid grid-cols-3 gap-4  mx-auto">
+<>
     <div className="h-48"></div>
+    <div className="container grid-rows-4 mx-auto">
     <div></div>
     <div></div>
     <div></div>
     <div></div>
     <div></div>
-
-    <div className="inline-flex space-x-2">
+    <SoundButton/>
+    <SoundButton/>
   
-    {buttons.map(butt=><div class="flex-1">{butt}</div>)}
 </div>
-</div>
-
+</>
 )
   
 
