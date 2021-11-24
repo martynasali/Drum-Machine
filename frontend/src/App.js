@@ -1,4 +1,5 @@
 import logo from './logo.svg';
+import Play from './Play';
 import './App.css';
 import './index.css';
 import React, { useEffect, useState } from 'react';
@@ -61,16 +62,13 @@ function App() {
   return (
 <>
     <div className="h-48"></div>
-    <div className="container grid-rows-4 mx-auto">
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <div></div>
-    <SoundButton/>
-    <SoundButton/>
-  
-</div>
+    <div className="container mx-auto px-4">
+   <Play/> 
+   <SoundButton/>
+   <SoundButton/>
+   <SoundButton/>
+   <SoundButton/>
+    </div>
 </>
 )
   
