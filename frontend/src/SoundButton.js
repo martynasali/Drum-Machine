@@ -36,27 +36,41 @@ function ButtonFour ()
 export default function SoundButton (){
     return(
         
+        <>
         
-        <div className="grid justify-items-center ">
-        <div className="inline-flex">
+        <div className="grid grid-cols-4" >
+        <div className="grid-span-1" >
+        <div className="grid grid-cols-4  " >
+        <div className="flex">
+        <div>
         <Button/>
         <Button/>
         <Button/>
         <ButtonFour/>
+        </div>
+        <div>
         <Button/>
         <Button/>
         <Button/>
         <ButtonFour/>
+        </div>
+        <div>
         <Button/>
         <Button/>
         <Button/>
         <ButtonFour/>
+        </div>
+        <div>
         <Button/>
         <Button/>
         <Button/>
         <ButtonFour/>
         </div>
         </div>
+        </div>
+        </div>
+        </div>
         
+        </>
         )
 }

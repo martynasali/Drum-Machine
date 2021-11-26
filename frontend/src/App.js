@@ -62,14 +62,18 @@ function App() {
   return (
 <>
     <div className="h-48"></div>
-    <div className="container mx-auto px-4">
-   <Play/> 
-   <SoundButton/>
-   <SoundButton/>
-   <SoundButton/>
-   <SoundButton/>
-    </div>
-</>
+    <div className="grid grid-cols-12">
+    <div className="col-span-2">
+   Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio incidunt amet velit quidem, voluptas deserunt adipisci alias obcaecati similique voluptate libero dolorum tenetur ab dolor sunt. Assumenda exercitationem neque aut.
+   </div>
+    <div className="col-span-2">
+   <SoundButton />    
+   </div>
+    <div className="col-span-2">
+   Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum, totam id consectetur laudantium earum alias labore maxime molestias ipsa iure aspernatur aliquid! Suscipit perspiciatis repudiandae repellat aspernatur tempora enim accusantium.
+   </div>
+   </div>
+</> 
 )
   
 
