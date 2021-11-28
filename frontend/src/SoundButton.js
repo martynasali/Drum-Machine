@@ -6,7 +6,7 @@ const buttonClassFour = " flex-1 h-8 p-6 w-8 rounded-lg bg-gray-500 border-4 bor
 const buttonClassSlected = " flex-1 h-8 p-6 w-8 rounded-lg bg-yellow-400 border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400";
 const song = []
 let index = 0
-function Button ()
+function Button ({number})
 {
     const [btnClass, setBtnClass] = useState(buttonClass)
 
@@ -17,7 +17,7 @@ function Button ()
         setBtnClass(buttonClass)
     }
   }
-    return <div class={btnClass} onClick={setClass}></div> 
+    return <div class={btnClass} onClick={setClass}>{number}</div> 
 }
 
 function ButtonFour ()
@@ -39,7 +39,7 @@ export default function SoundButton (){
         <>
         <div className="flex flex-row"> 
         <Button number={1}/>
-        <Button/>
+        <Button />
         <Button />
         <ButtonFour/>
         <Button/>
