@@ -13,10 +13,29 @@ export default function Play () {
     
     function start (){
         if (play === playStyle ){
-            setPlay(playingStyle)
-           synth.triggerAttack("C4", now)
-// wait one second before triggering the release
-            synth.triggerRelease(now + 1)
+           const synth = new Tone.MembraneSynth({
+  pitchDecay:0.05,
+  octaves: 4,
+  oscillator : {
+    type :"fmsine",
+    phase: 140,
+    modulationType: "sine",
+    modulationIndex:0.8,
+    partials: [1] //1,0.1,0.01,0.01
+  },
+  envelope :{
+    attack:0.01,
+    decay :0.74,
+    sustain: 0.71,
+    release: 0.05,
+    attackCurve :"exponential"
+  }
+}).toDestination();
+const seq = new Tone.Sequence((time, note) => {
+	synth.triggerAttackRelease(note, 0.1, time);
+	// subdivisions are given as subarrays
+}, ["C4", ["E4", "D4", "E4"], "G4", ["A4", "G4"]]).start(0);
+Tone.Transport.start();
         }else{
             setPlay(playStyle)
 
