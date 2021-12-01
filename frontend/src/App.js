@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import Play from './Play';
-import Buttons from './Buttons';
+import Player from './Player';
 import './App.css';
 import './index.css';
 import React, { useEffect, useState } from 'react';
@@ -66,12 +66,13 @@ function App() {
   return (
 <>
     <div className="h-48"></div>
-    <div className="grid grid-cols-12">
-    <Play/>
-   <SoundButton />    
     
-    <Buttons/>
-   </div>
+    <Play/>
+      
+    
+    <Player/>
+  
+    
 </> 
 )
   

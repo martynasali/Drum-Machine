@@ -144,7 +144,7 @@ return <> <div class={btnClass} onClick={setClass}>{number} Lorem ipsum dolor si
     return(
         
         <>
-        <div className="flex flex-row"> 
+        {/* <div className="flex flex-row">  */}
         {/* <Button number={0}/>
         <Button number={1}/>
         <Button number={2}/>
@@ -163,8 +163,8 @@ return <> <div class={btnClass} onClick={setClass}>{number} Lorem ipsum dolor si
         <ButtonFour number={15}/> */}
         
         {/* <NewButton/> */}
-        labas
-        </div>    
+        {/* labas
+        </div>     */}
         </>
         )
 }                                                                                                
