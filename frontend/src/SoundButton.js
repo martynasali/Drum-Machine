@@ -31,13 +31,14 @@ function NewButton ()
     }
     
     const [button, setButton] = useState(buttons)
+    const [style, setstyle] = useState(buttonClass)
     
-    function TurnOn ({indexas=7}) 
+    function TurnOn (indexas) 
     {
         const butts = button
         console.log(butts);
         console.log(indexas);
-
+        setstyle(buttonClassSlected)
     // if((indexas+1) % 4 == 0){
     //     butts[indexas].style = buttonClassSlected
     //     butts[indexas].isOn = true
@@ -50,10 +51,11 @@ function NewButton ()
         setButton(butts)
         // }
         
+
 }
 
 return  button.map( b =>
-   <div indexas={b.index} className={b.style} onClick={TurnOn} >{b.index}</div>  
+   <div indexas={b.index} className={style} onClick={()=>TurnOn(b.index)} >{b.index}</div>  
 )
 }
 
@@ -160,7 +162,8 @@ return <> <div class={btnClass} onClick={setClass}>{number} Lorem ipsum dolor si
         <Button number={14}/>
         <ButtonFour number={15}/> */}
         
-        <NewButton/>
+        {/* <NewButton/> */}
+        labas
         </div>    
         </>
         )

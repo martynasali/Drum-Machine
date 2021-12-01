@@ -1,5 +1,6 @@
 import logo from './logo.svg';
 import Play from './Play';
+import Buttons from './Buttons';
 import './App.css';
 import './index.css';
 import React, { useEffect, useState } from 'react';
@@ -69,6 +70,7 @@ function App() {
     <Play/>
    <SoundButton />    
     
+    <Buttons/>
    </div>
 </> 
 )
