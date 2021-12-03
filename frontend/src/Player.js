@@ -1,7 +1,7 @@
 import React from "react";
 import Buttons from "./Buttons";
 import { useState } from "react";
-import {oscillator, stop} from "./oscilator";
+import {oscillator, stop, create} from "./oscilator";
 import * as Tone from 'tone'
 
 
@@ -51,6 +51,7 @@ function start() {
     console.log("daina", song);
 //   let song = ["D4", "A4", "A4","F4","f4","f4","f4","f4","F4","f4","D4","A4","A4","A4","f4" ]
 oscillator(synth, song, 120)
+
 // Tone.start()
 }
 function end(){
@@ -64,6 +65,7 @@ function ender (e){
 
 
 return<> 
+<button className="w-16 h-16 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-red-900 bg-purple-500 " onClick={create}>Create</button>
 <button className="w-16 h-16 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-red-900 bg-purple-500 " onClick={start}>Play</button>
 <button className="w-16 h-16 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-red-900 bg-purple-500 " onClick={end}>Stop</button>
 <Buttons buttons={buttons}/>
