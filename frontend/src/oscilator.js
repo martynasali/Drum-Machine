@@ -1,39 +1,35 @@
 import * as Tone from 'tone'
 
-
-export default function oscillator (song, bpm)
+let switc = true
+let synths 
+let seq
+export function oscillator (synth, song, bpm)
 {
-const phaser = new Tone.Phaser({
-	frequency: 15,
-	octaves: 5,
-	baseFrequency: 1000
-}).toDestination();
+    if (switc === true)
+    {
+        synths = new Tone.MembraneSynth(synth).toDestination();
+        seq = new Tone.Sequence((time, note) => {
+            synths.triggerAttackRelease(note, 0.3, time);
+            // subdivisions are given as subarrays
+        }, song).start(0);
+    }
+    Tone.Transport.bpm.value = bpm;
+    Tone.Transport.start();
+    if (switc === false)
+    {
+    synths = false
+    seq = false
+    switc = true
+    }
+    
+    
+}
 
-           const synth = new Tone.MembraneSynth({
-  pitchDecay:0.05,
-  octaves: 4,
-  oscillator : {
-    type :"fmsine",
-    phase: 140,
-    modulationType: "sine",
-    modulationIndex:0.8,
-    partials: [1] //1,0.1,0.01,0.01
-  },
-  envelope :{
-    attack:0.01,
-    decay :0.74,
-    sustain: 0.71,
-    release: 0.05,
-    attackCurve :"exponential"
-  }
-}).toDestination();
-
-const seq = new Tone.Sequence((time, note) => {
-	synth.triggerAttackRelease(note, 0.3, time);
-	// subdivisions are given as subarrays
-}, song).start(0);
-Tone.Transport.bpm.value = bpm;
-Tone.Transport.start();
-
-
+export function stop ()
+{
+    
+ 
+    Tone.Transport.stop();
+    Tone.Transport.clear();
+    
 }
