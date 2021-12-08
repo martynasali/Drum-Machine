@@ -7,12 +7,12 @@ const buttonClass = " h-8 p-6 w-8 rounded-lg bg-gray-700 border-4 border-border-
 const buttonClassSlected = " h-8 p-6 w-8 rounded-lg bg-yellow-400 border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400";
 const buttonClassFour = " h-8 p-6 w-8 rounded-lg bg-gray-500 border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-gray-800";
 
-export default function Buttons ({buttons}) 
+export default function Buttons ({buttons, sound}) 
 {
 
         
     
-    function Button ({number})
+    function Button ({number, sound})
     {
         const [btnClass, setBtnClass] = useState(buttonClass)
         
@@ -21,7 +21,7 @@ export default function Buttons ({buttons})
             if(btnClass == buttonClass )
             {
                 setBtnClass(buttonClassSlected)
-                buttons[number].isOn = "C4" 
+                buttons[number].isOn = sound
                 
             }
             else
@@ -31,10 +31,10 @@ export default function Buttons ({buttons})
             }
             
         }
-        return <div onClick={setClass}  className={btnClass} >{number}</div> 
+        return <div onClick={setClass}  className={btnClass} >{number}{sound}</div> 
         
     }
-    function ButtonFour ({number})
+    function ButtonFour ({number, sound})
     {
         const [btnClassFour, setBtnClassFour] = useState(buttonClassFour)
         
@@ -43,7 +43,7 @@ export default function Buttons ({buttons})
             if(btnClassFour == buttonClassFour )
             {
                 setBtnClassFour(buttonClassSlected) 
-                buttons[number].isOn = "C4" 
+                buttons[number].isOn = sound 
             }
             else
             {
@@ -53,7 +53,7 @@ export default function Buttons ({buttons})
             }
             
         }
-        return <div onClick={setClassFour}  className={btnClassFour} >{number}</div> 
+        return <div onClick={setClassFour}  className={btnClassFour} >{number}{sound}</div> 
 
     }
 console.log("labas", buttons);
@@ -61,7 +61,7 @@ console.log("labas", buttons);
 return (
 <div className="flex justify-center">
 {buttons.map(b=><>
-{(b.index+1) % 4 == 0? <ButtonFour number={b.index}/> : <Button number={b.index}/>}
+{(b.index+1) % 4 == 0? <ButtonFour sound={sound} number={b.index}/> : <Button sound={sound} number={b.index}/>}
 </>)}
 </div>
 )

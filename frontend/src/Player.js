@@ -1,11 +1,16 @@
 import React from "react";
 import Buttons from "./Buttons";
-import { useState } from "react";
-import {oscillator, stop, create} from "./oscilator";
+import { useState, useEffect } from "react";
+import {stop} from "./oscilator";
 import * as Tone from 'tone'
+let seq
+let synth
+let synths
+let song
+let ini = false
+let playing = false
 
-
-const synth = {
+ synth =  {
   pitchDecay:0.05,
   octaves: 4,
   oscillator : {
@@ -25,6 +30,8 @@ const synth = {
 }
 
 
+
+
 export default function Player ()
 {
 
@@ -42,35 +49,70 @@ export default function Player ()
         isOn: null
     })}   
     }
-const [song, setSong] = useState(buttons)
 
-function start() {
+function initialize(){
     
+    console.log("synth, seq");
+if (ini === false){
+synths = new Tone.MembraneSynth(synth).toDestination();
+seq = new Tone.Sequence((time, note) => {
+        synths.triggerAttackRelease(note, 0.3, time);
+        // subdivisions are given as subarrays
+    }, song).start(0);
+    Tone.Transport.bpm.value = 120; //how many beats(quarter notes) per minute
+    Tone.Transport.start();
+    ini=true
+}
+else{
     
-    const song = buttons.map(b=>b.isOn)
-    console.log("daina", song);
+console.log("hi");
+}
+}
+
+function son () {
+    
+}
+
+// oscillator(synth, song)
 //   let song = ["D4", "A4", "A4","F4","f4","f4","f4","f4","F4","f4","D4","A4","A4","A4","f4" ]
-oscillator(synth, song, 120)
-
-// Tone.start()
+function change(){
+    song = buttons.map(b=>b.isOn)
+    console.log("song", song);
+    ini = false
+    playing = false
+    seq.stop();
+    oscillator()
+    
+    
 }
-function end(){
+useEffect(()=>{
 
-stop()
+    initialize()
+})
+
+function oscillator(){
+if(playing === false){
+    initialize()
+    Tone.start();
+    seq.start(); 
+    playing = true 
 }
-
-function ender (e){
-    console.log(e);
+else
+{
+    
+    seq.stop(); 
+    playing = false 
 }
-
+}
+    
 
 return<> 
-<button className="w-16 h-16 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-red-900 bg-purple-500 " onClick={create}>Create</button>
-<button className="w-16 h-16 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-red-900 bg-purple-500 " onClick={start}>Play</button>
-<button className="w-16 h-16 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-red-900 bg-purple-500 " onClick={end}>Stop</button>
-<Buttons buttons={buttons}/>
-<Buttons buttons={buttons}/>
-<Buttons buttons={buttons}/>
+<button className="w-16 h-16 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-red-900 bg-purple-500 " onClick={oscillator}>Play</button>
+<button className="w-16 h-16 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-red-900 bg-purple-500 " onClick={change}>Stop</button>
+<div onClick={change}>
+<Buttons sound={"C1"}  buttons={buttons}/>
+<Buttons sound={"C2"}  buttons={buttons}/>
+</div>
 </>
 
 }

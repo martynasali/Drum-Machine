@@ -70,7 +70,7 @@ function App() {
     <Play/>
       
     
-    <Player/>
+    <Player />
   
     
 </> 
