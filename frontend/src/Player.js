@@ -5,6 +5,7 @@ import {stop} from "./oscilator";
 import * as Tone from 'tone'
 let seq
 let synth
+let syntha
 let synths
 let song
 let ini = false
@@ -28,6 +29,7 @@ let playing = false
     attackCurve :"exponential"
   }
 }
+ 
 
 
 
@@ -55,8 +57,14 @@ function initialize(){
     console.log("synth, seq");
 if (ini === false){
 synths = new Tone.MembraneSynth(synth).toDestination();
+let synths3 = new Tone.MembraneSynth(synth).toDestination();
 seq = new Tone.Sequence((time, note) => {
+    if(note == "C3"){
+        console.log(note);
         synths.triggerAttackRelease(note, 0.3, time);
+        }else{
+        synths3.triggerAttackRelease("C4", 0.4, time);
+        }
         // subdivisions are given as subarrays
     }, song).start(0);
     Tone.Transport.bpm.value = 120; //how many beats(quarter notes) per minute
@@ -112,6 +120,7 @@ return<>
 <div onClick={change}>
 <Buttons sound={"C1"}  buttons={buttons}/>
 <Buttons sound={"C2"}  buttons={buttons}/>
+<Buttons sound={"C3"}  buttons={buttons}/>
 </div>
 </>
 
