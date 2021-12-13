@@ -8,6 +8,8 @@ let seq_j
 let seq_k
 let synth
 let synths
+let synths_j
+let synths_k
 let song_i
 let song_j
 let song_k
@@ -90,24 +92,21 @@ function initialize(){
     if (ini === false){
 console.log("ini == false");
 synths = new Tone.MembraneSynth(synth).toDestination();
-let synths_j = new Tone.MembraneSynth(synth).toDestination();
-let synths_k = new Tone.MembraneSynth(synth).toDestination();
+synths_j = new Tone.MembraneSynth(synth).toDestination();
+synths_k = new Tone.MembraneSynth(synth).toDestination();
 seq = new Tone.Sequence((time, note) => {
     
         synths.triggerAttackRelease(note, 0.3, time);
-        // subdivisions are given as subarrays
     }, song_i).start(0);
 
 seq_j = new Tone.Sequence((time, note) => {
 
         synths_j.triggerAttackRelease(note, 0.3, time);
-        // subdivisions are given as subarrays
     }, song_j).start(0);
 
 seq_k = new Tone.Sequence((time, note) => {
 
         synths_k.triggerAttackRelease(note, 0.3, time);
-        // subdivisions are given as subarrays
     }, song_k).start(0);
     Tone.Transport.bpm.value = 120; //how many beats(quarter notes) per minute
     Tone.Transport.start();
@@ -125,13 +124,15 @@ function change(){
     song_i = buttons_i.map(b=>b.isOn)
     song_j = buttons_j.map(b=>b.isOn)
     song_k = buttons_k.map(b=>b.isOn)
-    console.log("song_i", buttons_i);
-    console.log("song_j", buttons_j);
-    console.log("song_k", buttons_k);
+    console.table( buttons_i);
+    console.table( buttons_j);
+    console.table( buttons_k);
     ini = false
     playing = false
     seq.stop();
-    oscillator()    
+    seq_j.stop();
+    seq_k.stop();
+    oscillator()
 }
 useEffect(()=>{
 
