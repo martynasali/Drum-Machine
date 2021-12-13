@@ -4,13 +4,20 @@ import { useState, useEffect } from "react";
 import {stop} from "./oscilator";
 import * as Tone from 'tone'
 let seq
+let seq_j
+let seq_k
 let synth
-let syntha
 let synths
-let song
+let song_i
+let song_j
+let song_k
 let ini = false
 let playing = false
-
+let buttons_i
+let buttons_j
+let buttons_k
+// BUTTONS GRAŽINA TIK VIENĄ KINTAMĄJĮ
+// NEGROJA DU VIENU METU
  synth =  {
   pitchDecay:0.05,
   octaves: 4,
@@ -30,43 +37,78 @@ let playing = false
   }
 }
  
-
-
-
-
 export default function Player ()
 {
 
-    const buttons = []
-    for (var i = 0; i < 16; i++) {
+    const buttons_i = []
+    for (let i = 0; i < 16; i++) {
         if((i+1) %4 === 0){
             
-            buttons.push({
+            buttons_i.push({
                 index: i,
                 isOn: null
         })}
         else{
-    buttons.push({
+    buttons_i.push({
         index: i,
         isOn: null
     })}   
     }
+    const buttons_j = []
+    for (let i = 0; i < 16; i++) {
+        if((i+1) %4 === 0){
+
+            buttons_j.push({
+                index: i,
+                isOn: null
+        })}
+        else{
+    buttons_j.push({
+        index: i,
+        isOn: null
+    })}
+    }
+    const buttons_k = []
+    for (let i = 0; i < 16; i++) {
+        if((i+1) %4 === 0){
+
+            buttons_k.push({
+                index: i,
+                isOn: null
+        })}
+        else{
+    buttons_k.push({
+        index: i,
+        isOn: null
+    })}
+    }
+
+    
 
 function initialize(){
     
-    console.log("synth, seq");
-if (ini === false){
+    if (ini === false){
+console.log("ini == false");
 synths = new Tone.MembraneSynth(synth).toDestination();
-let synths3 = new Tone.MembraneSynth(synth).toDestination();
+let synths_j = new Tone.MembraneSynth(synth).toDestination();
+let synths_k = new Tone.MembraneSynth(synth).toDestination();
 seq = new Tone.Sequence((time, note) => {
-    if(note == "C3"){
-        console.log(note);
+    
         synths.triggerAttackRelease(note, 0.3, time);
-        }else{
-        synths3.triggerAttackRelease("C4", 0.4, time);
-        }
         // subdivisions are given as subarrays
-    }, song).start(0);
+    }, song_i).start(0);
+
+seq_j = new Tone.Sequence((time, note) => {
+
+        synths_j.triggerAttackRelease(note, 0.3, time);
+        // subdivisions are given as subarrays
+    }, song_j).start(0);
+
+seq_k = new Tone.Sequence((time, note) => {
+
+        synths_k.triggerAttackRelease(note, 0.3, time);
+        // subdivisions are given as subarrays
+    }, song_k).start(0);
     Tone.Transport.bpm.value = 120; //how many beats(quarter notes) per minute
     Tone.Transport.start();
     ini=true
@@ -77,21 +119,19 @@ console.log("hi");
 }
 }
 
-function son () {
-    
-}
-
 // oscillator(synth, song)
 //   let song = ["D4", "A4", "A4","F4","f4","f4","f4","f4","F4","f4","D4","A4","A4","A4","f4" ]
 function change(){
-    song = buttons.map(b=>b.isOn)
-    console.log("song", song);
+    song_i = buttons_i.map(b=>b.isOn)
+    song_j = buttons_j.map(b=>b.isOn)
+    song_k = buttons_k.map(b=>b.isOn)
+    console.log("song_i", buttons_i);
+    console.log("song_j", buttons_j);
+    console.log("song_k", buttons_k);
     ini = false
     playing = false
     seq.stop();
-    oscillator()
-    
-    
+    oscillator()    
 }
 useEffect(()=>{
 
@@ -102,8 +142,10 @@ function oscillator(){
 if(playing === false){
     initialize()
     Tone.start();
-    seq.start(); 
-    playing = true 
+    seq.start(0);
+    seq_j.start(0);
+    seq_k.start(0);
+    playing = true
 }
 else
 {
@@ -113,14 +155,13 @@ else
 }
 }
     
-
 return<> 
 <button className="w-16 h-16 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-red-900 bg-purple-500 " onClick={oscillator}>Play</button>
 <button className="w-16 h-16 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-red-900 bg-purple-500 " onClick={change}>Stop</button>
 <div onClick={change}>
-<Buttons sound={"C1"}  buttons={buttons}/>
-<Buttons sound={"C2"}  buttons={buttons}/>
-<Buttons sound={"C3"}  buttons={buttons}/>
+<Buttons sound={"C1"}  buttons={buttons_i}/>
+<Buttons sound={"C2"}  buttons={buttons_j}/>
+<Buttons sound={"C3"}  buttons={buttons_k}/>
 </div>
 </>
 

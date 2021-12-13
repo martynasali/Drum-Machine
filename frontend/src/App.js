@@ -59,7 +59,7 @@ function App() {
   }, [])
   let buttons = []
     for (let i = 0; i < 16; i++) {    
-    buttons.push(<div class={btnClass} onClick={()=>{
+    buttons.push(<div className={btnClass} onClick={()=>{
       setClass(buttonClassSlected)}}></div>)
       }
 

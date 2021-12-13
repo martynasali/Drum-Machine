@@ -15,21 +15,18 @@ export default function Buttons ({buttons, sound})
     function Button ({number, sound})
     {
         const [btnClass, setBtnClass] = useState(buttonClass)
-        
+
         function setClass () {
-            
-            if(btnClass == buttonClass )
+            if(btnClass === buttonClass )
             {
                 setBtnClass(buttonClassSlected)
                 buttons[number].isOn = sound
-                
             }
             else
             {
                 setBtnClass(buttonClass)
                 buttons[number].isOn = null 
             }
-            
         }
         return <div onClick={setClass}  className={btnClass} >{number}{sound}</div> 
         
@@ -40,7 +37,7 @@ export default function Buttons ({buttons, sound})
         
         function setClassFour () {
 
-            if(btnClassFour == buttonClassFour )
+            if(btnClassFour === buttonClassFour )
             {
                 setBtnClassFour(buttonClassSlected) 
                 buttons[number].isOn = sound 
@@ -61,15 +58,9 @@ console.log("labas", buttons);
 return (
 <div className="flex justify-center">
 {buttons.map(b=><>
-{(b.index+1) % 4 == 0? <ButtonFour sound={sound} number={b.index}/> : <Button sound={sound} number={b.index}/>}
+{(b.index+1) % 4 === 0? <ButtonFour sound={sound} number={b.index}/> : <Button sound={sound} number={b.index}/>}
 </>)}
 </div>
 )
-
-
-
-    
-
-
 }
 
