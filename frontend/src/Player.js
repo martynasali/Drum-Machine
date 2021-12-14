@@ -77,6 +77,10 @@ function initialize(){
         synths_k.triggerAttackRelease(note, 0.3, time);
     }, song_k).start(0);
 
+    let timing = new Tone.Sequence((time, note) => {
+        console.log(note)
+    }, ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16"]).start(0);
+
 
 }
 else{
