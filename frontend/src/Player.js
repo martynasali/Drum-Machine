@@ -1,7 +1,6 @@
 import React from "react";
 import Buttons from "./Buttons";
 import { useState, useEffect } from "react";
-import {stop} from "./oscilator";
 import * as Tone from 'tone'
 let seq
 let seq_j
@@ -15,11 +14,7 @@ let song_j
 let song_k
 let ini = false
 let playing = false
-let buttons_i
-let buttons_j
-let buttons_k
-// BUTTONS GRAŽINA TIK VIENĄ KINTAMĄJĮ
-// NEGROJA DU VIENU METU
+
  synth =  {
   pitchDecay:0.05,
   octaves: 4,
@@ -42,50 +37,24 @@ let buttons_k
 export default function Player ()
 {
 
-    const buttons_i = []
+    const buttons = []
     for (let i = 0; i < 16; i++) {
         if((i+1) %4 === 0){
             
-            buttons_i.push({
+            buttons.push({
                 index: i,
                 isOn: null
         })}
         else{
-    buttons_i.push({
+    buttons.push({
         index: i,
         isOn: null
     })}   
     }
-    const buttons_j = []
-    for (let i = 0; i < 16; i++) {
-        if((i+1) %4 === 0){
+    const buttons_i = buttons.map(i=>{return{...i}})
+    const buttons_j = buttons.map(j=>{return{...j}})
+    const buttons_k = buttons.map(k=>{return{...k}})
 
-            buttons_j.push({
-                index: i,
-                isOn: null
-        })}
-        else{
-    buttons_j.push({
-        index: i,
-        isOn: null
-    })}
-    }
-    const buttons_k = []
-    for (let i = 0; i < 16; i++) {
-        if((i+1) %4 === 0){
-
-            buttons_k.push({
-                index: i,
-                isOn: null
-        })}
-        else{
-    buttons_k.push({
-        index: i,
-        isOn: null
-    })}
-    }
-
-    
 
 function initialize(){
     
