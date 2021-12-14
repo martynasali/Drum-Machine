@@ -134,8 +134,8 @@ useEffect(()=>{
 
 
 return<> 
-<button className="w-16 h-16 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-red-900 bg-purple-500 " onClick={play}>{playing1?"Stop":"Play"}</button>
 {/*<button className="w-16 h-16 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-red-900 bg-purple-500 " onClick={change}>Stop</button>*/}
+<button className="w-16 h-16 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-red-900 bg-purple-500 " onClick={play}>{playing1?"Stop":"Play"}</button>
 <div onClick={change}>
 <Buttons sound={"C1"} setbutton={setButtons_i}  buttons={buttons_i}/>
 <Buttons sound={"C2"} setbutton={setButtons_j} buttons={buttons_j}/>
