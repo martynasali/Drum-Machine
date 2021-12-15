@@ -38,7 +38,7 @@ let playing = false
 export default function Player ()
 {
 const [playing1, setPlaying1]= useState(false)
-    // mygtukų objektai
+
     const buttons = []
     for (let i = 0; i < 16; i++) {
         if((i+1) %4 === 0){
@@ -130,6 +130,7 @@ useEffect(()=>{
            seq_j.stop();
            seq_k.stop();
         }
+
     }
 
 
