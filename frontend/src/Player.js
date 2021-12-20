@@ -3,22 +3,11 @@ import React from "react";
 import { useState, useEffect } from "react";
 import * as Tone from 'tone'
 import Slider from '@mui/material/Slider';
+import TextField from '@mui/material/TextField';
 let seq_i
 let seq_j
 let seq_k
-let synth
-let synths_i = new Tone.MembraneSynth(synth).toDestination();
-let synths_j = new Tone.MembraneSynth(synth).toDestination();
-let synths_k = new Tone.MetalSynth().toDestination();
-let song_i
-let song_j
-let song_k
-let playing = [false, false]
-
-
-
-
- synth =  {
+let  synth =  {
   pitchDecay:0.05,
   octaves: 4,
   oscillator : {
@@ -36,6 +25,18 @@ let playing = [false, false]
     attackCurve :"exponential"
   }
 }
+let synths_i = new Tone.MembraneSynth(synth).toDestination();
+let synths_j = new Tone.MembraneSynth(synth).toDestination();
+let synths_k = new Tone.MetalSynth(synth).toDestination();
+let song_i
+let song_j
+let song_k
+let playing = [false, false]
+
+
+
+
+
 
 const buttonClass = "h-8 p-6 w-8 rounded-lg bg-gray-700 border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-gray-800";
 const buttonClassSelect = " h-8 p-6 w-8 rounded-lg bg-yellow-400 border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400";
@@ -76,15 +77,13 @@ function change(){
     song_i = buttons_i.map(b=>b.isOn)
     song_j = buttons_j.map(b=>b.isOn)
     song_k = buttons_k.map(b=>b.isOn)
-    console.table("song_i", song_i)
-    console.table("song_j", song_j)
-    console.table("song_k", song_k)
         if(playing[0]){
             play();
     }
 }
 
     function play () {
+        // Tone.start()
         seq_i = new Tone.Sequence((time, note) => {
         synths_i.triggerAttackRelease(note, 0.3, time);
         }, song_i).start(0)
@@ -92,10 +91,10 @@ function change(){
         synths_j.triggerAttackRelease(note, 0.3, time);
         }, song_j).start(0)
         seq_k = new Tone.Sequence((time, note) => {
-        synths_k.triggerAttackRelease(note, 0.1, time);
+        synths_k.triggerAttackRelease(note, 0.3, time);
         }, song_k).start(0)
-        Tone.Transport.bpm.value = bpm; //how many beats(quarter notes) per minute
-        Tone.Transport.start(0);
+        Tone.Transport.bpm.value = bpm //how many beats(quarter notes) per minute
+        Tone.Transport.start();
         playing[0] = true
     }
 
@@ -127,6 +126,10 @@ function change(){
     useEffect(() => {
         change()
     },[buttons_i, buttons_j, buttons_k])
+   
+    useEffect(() => {
+        change()
+},[bpm])
 
 
     function Buttons ({buttons, sound, setButton})
@@ -177,9 +180,35 @@ function change(){
             </div>
         )
     }
-function setbpm(value) {
-  setBpm(value);
-    play()
+    let [bpmInfo, setBpmInfo]= useState("Beats per Minute");
+    let [error, setError]= useState("");
+    function setbpm(e) {
+    let value = 100
+    
+     if(e.target.value === null || e.target.value === undefined || e.target.value == "00") {
+        value = 100
+    }
+    else
+    {value = e.target.value}
+    // if(typeof  !== null){
+    //     value = e.target.value
+    // }
+
+    if(playing[0]){
+    pause()
+    }
+  console.log(value);
+  if(value>20000 || value < 1){
+      setBpmInfo("20 000 BPM is max")
+      setBpm(100)
+  }
+  else{
+      setBpm(value);
+      setBpmInfo("Beats per Minute")
+  }
+  if(playing[0]){
+      play()
+  }
 }
 
 
@@ -190,16 +219,15 @@ function setbpm(value) {
 <Buttons sound={"C1"} setButton={setButtons_i} buttons={buttons_i}/>
 <Buttons sound={"C2"} setButton={setButtons_j} buttons={buttons_j}/>
 <Buttons sound={"C3"} setButton={setButtons_k} buttons={buttons_k}/>
-<input type="range" min="1" max="200" value={bpm} class="slider" id="myRange"></input>
-<Slider
-        defaultValue={100}
-        getAriaValueText={setBpm}
-        valueLabelDisplay="auto"
-        step={1}
-        marks
-        min={100}
-        max={200}
-      />
+      <TextField
+          color="secondary"
+          id="outlined-number"
+          label={bpmInfo}
+          defaultValue={100}
+          type="number"
+        //   onInput={()={setBpm}}
+          onChange={setbpm}
+        />
 </>
 
 }
