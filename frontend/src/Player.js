@@ -7,6 +7,7 @@ import TextField from '@mui/material/TextField';
 let seq_i
 let seq_j
 let seq_k
+let seq_l
 let  synth =  {
   pitchDecay:0.05,
   octaves: 4,
@@ -28,9 +29,11 @@ let  synth =  {
 let synths_i = new Tone.MembraneSynth(synth).toDestination();
 let synths_j = new Tone.MembraneSynth(synth).toDestination();
 let synths_k = new Tone.MetalSynth(synth).toDestination();
+let synths_l = new Tone.MetalSynth(synth).toDestination();
 let song_i
 let song_j
 let song_k
+let song_l
 let playing = [false, false]
 
 
@@ -68,6 +71,7 @@ const [bpm, setBpm ]= useState(100)
     const [buttons_i, setButtons_i] = useState(buttonsE.map(i=>{return{...i}}))
     const [buttons_j, setButtons_j] = useState(buttonsE.map(j=>{return{...j}}))
     const [buttons_k, setButtons_k] = useState(buttonsE.map(k=>{return{...k}}))
+    const [buttons_l, setButtons_l] = useState(buttonsE.map(l=>{return{...l}}))
 
 function change(){
     if(playing[0]){
@@ -77,13 +81,26 @@ function change(){
     song_i = buttons_i.map(b=>b.isOn)
     song_j = buttons_j.map(b=>b.isOn)
     song_k = buttons_k.map(b=>b.isOn)
+    song_l = buttons_l.map(b=>b.isOn)
+    playing[1] = true
         if(playing[0]){
             play();
     }
 }
 
+
+    function playButton() {
+        if(playing[0]){
+            return
+        }
+        else{
+            play()
+        }
+    }
+
     function play () {
         // Tone.start()
+        if(playing[1]){
         seq_i = new Tone.Sequence((time, note) => {
         synths_i.triggerAttackRelease(note, 0.3, time);
         }, song_i).start(0)
@@ -93,15 +110,24 @@ function change(){
         seq_k = new Tone.Sequence((time, note) => {
         synths_k.triggerAttackRelease(note, 0.3, time);
         }, song_k).start(0)
+        seq_l = new Tone.Sequence((time, note) => {
+        synths_l.triggerAttackRelease(note, 0.3, time);
+        }, song_l).start(0)
         Tone.Transport.bpm.value = bpm //how many beats(quarter notes) per minute
         Tone.Transport.start();
         playing[0] = true
+        }
     }
 
     function stop () {
+        if (!playing[0]) {
+            console.log("Stop returning");
+            return   
+        }
         seq_i.stop()
         seq_j.stop()
         seq_k.stop()
+        seq_l.stop()
         Tone.Transport.stop()
         playing[0] = false
     }
@@ -110,14 +136,14 @@ function change(){
         seq_i.start()
         seq_j.start()
         seq_k.start()
+        seq_l.start()
         
     }
     function pause () {
         seq_i.stop()
         seq_j.stop()
         seq_k.stop()
-        // Tone.Transport.stop()
-        playing[1] = true
+        seq_l.stop()
     }
 
 
@@ -125,7 +151,7 @@ function change(){
     
     useEffect(() => {
         change()
-    },[buttons_i, buttons_j, buttons_k])
+    },[buttons_i, buttons_j, buttons_k, buttons_l])
    
     useEffect(() => {
         change()
@@ -211,14 +237,38 @@ function change(){
   }
 }
 
+function changeSounds () {
+    synth = {
+  pitchDecay:0.05,
+  octaves: 2,
+  oscillator : {
+    type :"fmsine",
+    phase: 140,
+    modulationType: "square",
+    modulationIndex:0.8,
+    partials: [1]
+  },
+  envelope :{
+    attack:0.01,
+    decay :0.74,
+    sustain: 0.71,
+    release: 0.05,
+    attackCurve :"exponential"
+  }
+}
+    
+}
+
 
     return<>
 <button className="w-16 h-16 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-red-900 bg-purple-500 " onClick={stop}>Stop</button>
-<button className="w-16 h-16 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-red-900 bg-purple-500 " onClick={play}>{playing1?"Stop":"Play"}</button>
+<button className="w-16 h-16 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-red-900 bg-purple-500 " onClick={playButton}>Play</button>
+<button className="w-16 h-16 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-red-900 bg-purple-500 " onClick={changeSounds}>changeSounds</button>
 
 <Buttons sound={"C1"} setButton={setButtons_i} buttons={buttons_i}/>
 <Buttons sound={"C2"} setButton={setButtons_j} buttons={buttons_j}/>
 <Buttons sound={"C3"} setButton={setButtons_k} buttons={buttons_k}/>
+<Buttons sound={"C8"} setButton={setButtons_l} buttons={buttons_l}/>
       <TextField
           color="secondary"
           id="outlined-number"
