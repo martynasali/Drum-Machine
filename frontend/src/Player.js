@@ -1,6 +1,5 @@
 import React from "react";
 import {useImmer} from 'use-immer';
-// import Buttons from "./Buttons";
 import { useState, useEffect } from "react";
 import * as Tone from 'tone'
 import Slider from '@mui/material/Slider';
@@ -30,7 +29,7 @@ let  synth =  {
 let synths_i = new Tone.MembraneSynth(synth).toDestination();
 let synths_j = new Tone.MembraneSynth(synth).toDestination();
 let synths_k = new Tone.MetalSynth(synth).toDestination();
-let synths_l = new Tone.MetalSynth(synth).toDestination();
+let synths_l = new Tone.PluckSynth(synth).toDestination();
 let song_i
 let song_j
 let song_k
@@ -217,9 +216,6 @@ function change(){
     }
     else
     {value = e.target.value}
-    // if(typeof  !== null){
-    //     value = e.target.value
-    // }
 
     if(playing[0]){
     pause()
@@ -288,7 +284,7 @@ function changeSounds () {
 <Buttons sound={"C1"} setButton={setButtons_i} buttons={buttons_i}/>
 <Buttons sound={"C2"} setButton={setButtons_j} buttons={buttons_j}/>
 <Buttons sound={"C3"} setButton={setButtons_k} buttons={buttons_k}/>
-<Buttons sound={"C8"} setButton={setButtons_l} buttons={buttons_l}/>
+<Buttons sound={"C2"} setButton={setButtons_l} buttons={buttons_l}/>
 <div className="mt-4 flex justify-center">
       <TextField
           color="secondary"
