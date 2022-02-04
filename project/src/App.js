@@ -1,5 +1,4 @@
 import Player from './Player';
-import './App.css';
 import './index.css';
 
 
