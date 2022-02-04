@@ -214,8 +214,8 @@ function change(){
     pause()
     }
   console.log(value);
-  if(value>10000 || value < 1){
-      setBpmInfo("10 000 BPM is max")
+  if(value>1000 || value < 1){
+      setBpmInfo("1000 BPM is max")
       setBpm(100)
   }
   else{
