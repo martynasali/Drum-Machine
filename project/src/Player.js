@@ -249,9 +249,12 @@ function setOctave(e, num)
 
     return<>
 <div className="container">
-<div className="flex justify-center">
+<div className="grid grid-cols-5">
+<div></div>
+<div>
 <button className="w-16 h-16 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-pink-900 bg-gray-500 " onClick={stop}>Stop</button>
 <button className="w-16 h-16 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-pink-900 bg-gray-500 " onClick={playButton}>Play</button>
+</div>
 </div>
 </div>
 <Buttons sound={"C1"} setButton={setButtons_i} buttons={buttons_i}/>
