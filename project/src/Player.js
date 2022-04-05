@@ -34,9 +34,9 @@ let song_k
 let song_l
 let playing = [false, false]
 
-const buttonClass = "h-8 p-6 w-8 rounded-lg bg-gray-700 border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-gray-800";
-const buttonClassSelect = " h-8 p-6 w-8 rounded-lg bg-yellow-400 border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400";
-const buttonClassFour = "h-8 p-6 w-8 rounded-lg bg-gray-500 border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-gray-800";
+const buttonClass = "p-4 md:p-5 xl:p-6 rounded-lg bg-gray-700 border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-gray-800";
+const buttonClassSelect = "p-4 md:p-5 xl:p-6 rounded-lg bg-yellow-400 border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400";
+const buttonClassFour = "p-4 md:p-5 xl:p-6 rounded-lg bg-gray-500 border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-gray-800";
 
 export default function Player ()
 {
@@ -52,13 +52,13 @@ const [bpm, setBpm ]= useState(100)
             buttonsE.push({
                 index: i,
                 isOn: null,
-                style: "h-8 p-6 w-8 rounded-lg bg-gray-500 border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-gray-800"
+                style: "p-4 md:p-5 xl:p-6  rounded-lg bg-gray-500 border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-gray-800"
         })}
         else{
     buttonsE.push({
         index: i,
         isOn: null,
-        style: "h-8 p-6 w-8 rounded-lg bg-gray-700 border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-gray-800"
+        style: "p-4 md:p-5 xl:p-6 rounded-lg bg-gray-700 border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-gray-800"
     })}
     }
     const [buttons_i, setButtons_i] = useState(buttonsE.map(i=>{return{...i}}))
@@ -124,14 +124,7 @@ function change(){
         Tone.Transport.stop()
         playing[0] = false
     }
-    
-    function resume() {
-        seq_i.start()
-        seq_j.start()
-        seq_k.start()
-        seq_l.start()
-        
-    }
+
     function pause () {
         seq_i.stop()
         seq_j.stop()
@@ -252,8 +245,8 @@ function setOctave(e, num)
 <div className="grid grid-cols-5">
 <div></div>
 <div>
-<button className="w-16 h-16 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-pink-900 bg-gray-500 " onClick={stop}>Stop</button>
-<button className="w-16 h-16 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-pink-900 bg-gray-500 " onClick={playButton}>Play</button>
+<button className="text-white w-14 h-10 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-green-400 bg-gradient-to-r from-green-400 to-green-500 hover:from-pink-500 hover:to-green-500 " onClick={playButton}>Play</button>
+<button className="text-white w-14 h-10 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-red-400 bg-gradient-to-r from-red-400 to-red-500 hover:from-pink-500 hover:to-red-500 " onClick={stop}>Stop</button>
 </div>
 </div>
 </div>
