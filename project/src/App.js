@@ -1,7 +1,7 @@
 import Player from './Player';
 import './index.css';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { green } from '@mui/material/colors';
+import { grey } from '@mui/material/colors';
 
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
           mode: 'dark',
         },
         primary: {
-            main: green[500],
+            main: grey[500],
           }
       });
 

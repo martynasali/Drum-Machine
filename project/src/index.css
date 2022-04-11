@@ -7,6 +7,8 @@
 }
 #root{
     background-color: black;
+    display: flex;
+    justify-content: center;
 }
 html{
     font-family: 'Karla';
@@ -44,6 +46,7 @@ html{
 .kontainer{
     display: flex;
     flex-direction: column;
+    width: min-content;
 }
 .play-pause{
     margin-top: 50px;
@@ -79,14 +82,16 @@ html{
 }
 .mygtukas--container{
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
 }
+  
 input{
     color: black;
     
 }
 .--octave{
     color: white;
+    width: auto;
 
 }
 .mui--buttons{
@@ -94,19 +99,23 @@ input{
     gap: 10px;
     justify-content: center;
     margin-top: 30px;
-    padding-left: 20%;
-    padding-right: 20%;
 }
 #standard-number-label, #outlined-number-label{
     color: white;
 }
 
-@media only screen and (max-width:600px){
+@media only screen and (max-width:650px){
     .mygtukas--container{
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         /* background-color: blueviolet; */
         margin-top: 30px;
+    }
+    #root{
+        display: block;
+    }
+    .kontainer{
+        width: auto;
     }
     .mui--buttons{
         display: grid;

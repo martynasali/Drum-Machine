@@ -236,7 +236,7 @@ function setOctave(e, num)
      if (num===4) {
         synth.octaves = Number(e.target.value)
         synths_l = new Tone.MembraneSynth(synth).toDestination();
-     }
+    }
 }
 
 
@@ -250,7 +250,6 @@ function setOctave(e, num)
 <Buttons sound={"C2"} setButton={setButtons_j} buttons={buttons_j}/>
 <Buttons sound={"C3"} setButton={setButtons_k} buttons={buttons_k}/>
 <Buttons sound={"C2"} setButton={setButtons_l} buttons={buttons_l}/>
-</div>
 <div className="mui--buttons">
       <TextField
           className="--octave"
@@ -296,6 +295,7 @@ function setOctave(e, num)
           onChange={(e)=>{setOctave(e, 4)}}
         />
         </div>
+    </div>
       
 </>
 
