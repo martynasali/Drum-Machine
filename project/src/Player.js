@@ -2,6 +2,9 @@ import React from "react";
 import { useState, useEffect } from "react";
 import * as Tone from 'tone'
 import TextField from '@mui/material/TextField';
+
+
+
 let seq_i
 let seq_j
 let seq_k
@@ -33,16 +36,15 @@ let song_j
 let song_k
 let song_l
 let playing = [false, false]
-
-const buttonClass = "p-4 md:p-5 xl:p-6 rounded-lg bg-gray-700 border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-gray-800";
-const buttonClassSelect = "p-4 md:p-5 xl:p-6 rounded-lg bg-yellow-400 border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400";
-const buttonClassFour = "p-4 md:p-5 xl:p-6 rounded-lg bg-gray-500 border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-gray-800";
+ 
+const buttonClass = "mygtukas p-4 bg-gray-700 m-1";
+const buttonClassSelect = "mygtukas-clicked";
+const buttonClassFour = "mygtukas p-4 bg-gray-500 m-1";
 
 export default function Player ()
 {
 
 
-const [playing1, setPlaying1]= useState(false)
 const [bpm, setBpm ]= useState(100)
 
     const buttonsE = []
@@ -52,13 +54,13 @@ const [bpm, setBpm ]= useState(100)
             buttonsE.push({
                 index: i,
                 isOn: null,
-                style: "p-4 md:p-5 xl:p-6  rounded-lg bg-gray-500 border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-gray-800"
+                style: "mygtukas p-4  bg-gray-500 m-1"
         })}
         else{
     buttonsE.push({
         index: i,
         isOn: null,
-        style: "p-4 md:p-5 xl:p-6 rounded-lg bg-gray-700 border-4 border-border-gray-500 border-opacity-100 hover:border-pink-400 hover:bg-gray-800"
+        style: "mygtukas p-4 bg-gray-700 m-1"
     })}
     }
     const [buttons_i, setButtons_i] = useState(buttonsE.map(i=>{return{...i}}))
@@ -92,7 +94,6 @@ function change(){
     }
 
     function play () {
-        console.log("play synth", synth);
         if(playing[1]){
         seq_i = new Tone.Sequence((time, note) => {
         synths_i.triggerAttackRelease(note, 0.3, time);
@@ -179,13 +180,13 @@ function change(){
 
             }
 
-            return <div onClick={setStyle} className={className}></div>
+            return <div onClick={setStyle} className={className}> {number+1}</div>
 
         }
 
 
         return (
-            <div className="flex justify-center">
+            <div className="mygtukas--container">
                 {buttons.map(b=><>
                     { <Button className={b.style}  sound={sound} number={b.index}/> }
                 </>)}
@@ -193,11 +194,10 @@ function change(){
         )
     }
     let [bpmInfo, setBpmInfo]= useState("Beats per Minute");
-    let [error, setError]= useState("");
     function setbpm(e) {
     let value = 100
     
-     if(e.target.value === null || e.target.value === undefined || e.target.value == "00") {
+     if(e.target.value === null || e.target.value === undefined || e.target.value === "00") {
         value = 100
     }
     else
@@ -241,31 +241,27 @@ function setOctave(e, num)
 
 
     return<>
-<div className="container">
-<div className="grid grid-cols-5">
-<div></div>
-<div>
-<button className="text-white w-14 h-10 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-green-400 bg-gradient-to-r from-green-400 to-green-500 hover:from-pink-500 hover:to-green-500 " onClick={playButton}>Play</button>
-<button className="text-white w-14 h-10 rounded-lg border-4 border-border-gray-500 border-opacity-100 hover:border-red-400 bg-gradient-to-r from-red-400 to-red-500 hover:from-pink-500 hover:to-red-500 " onClick={stop}>Stop</button>
-</div>
-</div>
+<div className="kontainer">
+<div className="play-pause mygtukas--container">
+<button className="play" onClick={playButton}>Play</button>
+<button className="pause" onClick={stop}>Stop</button>
 </div>
 <Buttons sound={"C1"} setButton={setButtons_i} buttons={buttons_i}/>
 <Buttons sound={"C2"} setButton={setButtons_j} buttons={buttons_j}/>
 <Buttons sound={"C3"} setButton={setButtons_k} buttons={buttons_k}/>
 <Buttons sound={"C2"} setButton={setButtons_l} buttons={buttons_l}/>
-<div className="mt-4 flex justify-center">
+</div>
+<div className="mui--buttons">
       <TextField
-          color="secondary"
-          id="outlined-number"
+          className="--octave"
+          id="standard-number"
           label={bpmInfo}
           defaultValue={100}
           type="number"
-        //   onInput={()={setBpm}}
           onChange={setbpm}
         />
       <TextField
-          color="secondary"
+          className="--octave"
           id="outlined-number"
           label="Octave 1"
           defaultValue={1}
@@ -273,15 +269,17 @@ function setOctave(e, num)
           onChange={(e)=>{setOctave(e, 1)}}
         />
       <TextField
-          color="secondary"
+          className="--octave"
           id="outlined-number"
           label="Octave 2"
           defaultValue={1}
           type="number"
+          min="0"
           onChange={(e)=>{setOctave(e, 2)}}
         />
       <TextField
-          color="secondary"
+          className="--octave"
+          color="primary"
           id="outlined-number"
           label="Octave 3"
           defaultValue={1}
@@ -289,7 +287,7 @@ function setOctave(e, num)
           onChange={(e)=>{setOctave(e, 3)}}
         />
       <TextField
-
+          className="--octave"
           color="secondary"
           id="outlined-number"
           label="Octave 4"
