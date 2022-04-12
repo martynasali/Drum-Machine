@@ -6,13 +6,14 @@
     box-shadow: 0px 1px 6px 4px rgba(115, 253, 170, 0.89)
 }
 #root{
-    background-color: black;
     display: flex;
     justify-content: center;
+    background-color: black;
 }
 html{
     font-family: 'Karla';
     background-color: black;
+
 }
 .mygtukas-clicked{
     display: flex;
@@ -24,7 +25,7 @@ html{
     margin:5px;
     border-radius: 10px;
     /* background-color: white; */
-     box-shadow: 0px 1px 6px 4px rgba(115, 253, 170, 0.89);
+     box-shadow: 0px 1px 6px 4px rgba(115, 244, 236, 0.89);
     color: rgb(255, 255, 255);
 }
 
@@ -47,9 +48,13 @@ html{
     display: flex;
     flex-direction: column;
     width: min-content;
+    box-shadow: 1px -2px 28px 3px rgba(115, 244, 236, 0.98);
+    border-radius: 20px;
+    padding: 30px;
+    margin-top: 40px;
+    
 }
 .play-pause{
-    margin-top: 50px;
     margin-right: 50%;
     margin-bottom: 30px;
 }
@@ -59,10 +64,9 @@ html{
     color: white;
     padding: 5px 10px;
     border: 1px solid #4d9e64;
-    margin-top: 20px;
     margin-left: 10px;
     margin-right: 10px;
-    box-shadow: 0px 1px 6px 4px rgba(115, 253, 170, 0.49)
+    box-shadow: 0px 1px 6px 4px rgba(115, 244, 236, 0.49)
 }
 .pause{
     border-radius: 10px;
@@ -70,7 +74,6 @@ html{
     color: white;
     padding: 5px 10px;
     border: 1px solid #9e4d60;
-    margin-top: 20px;
     margin-right: 10px;
     box-shadow: 0px 1px 6px 4px rgba(253, 115, 115, 0.49)
 }
@@ -78,7 +81,7 @@ html{
     box-shadow: 0px 1px 6px 4px rgba(253, 115, 115, 0.89)
 }
 .play:hover{
-    box-shadow: 0px 1px 6px 4px rgba(115, 253, 170, 0.89)
+    box-shadow: 0px 1px 6px 4px rgba(115, 244, 236, 0.89)
 }
 .mygtukas--container{
     display: flex;
@@ -116,6 +119,7 @@ input{
     }
     .kontainer{
         width: auto;
+        margin: 15px;
     }
     .mui--buttons{
         display: grid;
