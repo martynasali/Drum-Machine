@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import * as Tone from 'tone'
+import {MembraneSynth, MetalSynth, PluckSynth, Transport, Sequence, start} from 'tone'
 import TextField from '@mui/material/TextField';
 
 
@@ -27,10 +27,10 @@ let  synth =  {
     attackCurve :"exponential"
   }
 }
-let synths_i = new Tone.MembraneSynth(synth).toDestination();
-let synths_j = new Tone.MembraneSynth(synth).toDestination();
-let synths_k = new Tone.MetalSynth(synth).toDestination();
-let synths_l = new Tone.PluckSynth(synth).toDestination();
+let synths_j = new MembraneSynth(synth).toDestination();
+let synths_k = new MetalSynth(synth).toDestination();
+let synths_i = new MembraneSynth(synth).toDestination();
+let synths_l = new PluckSynth(synth).toDestination();
 let song_i
 let song_j
 let song_k
@@ -72,7 +72,7 @@ function change(){
     if(playing[0]){
         pause();
     }
-    Tone.start()
+    start()
     song_i = buttons_i.map(b=>b.isOn)
     song_j = buttons_j.map(b=>b.isOn)
     song_k = buttons_k.map(b=>b.isOn)
@@ -95,20 +95,20 @@ function change(){
 
     function play () {
         if(playing[1]){
-        seq_i = new Tone.Sequence((time, note) => {
+        seq_i = new Sequence((time, note) => {
         synths_i.triggerAttackRelease(note, 0.3, time);
         }, song_i).start(0)
-        seq_j = new Tone.Sequence((time, note) => {
+        seq_j = new Sequence((time, note) => {
         synths_j.triggerAttackRelease(note, 0.3, time);
         }, song_j).start(0)
-        seq_k = new Tone.Sequence((time, note) => {
+        seq_k = new Sequence((time, note) => {
         synths_k.triggerAttackRelease(note, 0.3, time);
         }, song_k).start(0)
-        seq_l = new Tone.Sequence((time, note) => {
+        seq_l = new Sequence((time, note) => {
         synths_l.triggerAttackRelease(note, 0.3, time);
         }, song_l).start(0)
-        Tone.Transport.bpm.value = bpm //how many beats(quarter notes) per minute
-        Tone.Transport.start();
+        Transport.bpm.value = bpm //how many beats(quarter notes) per minute
+        Transport.start();
         playing[0] = true
         }
     }
@@ -122,7 +122,7 @@ function change(){
         seq_j.stop()
         seq_k.stop()
         seq_l.stop()
-        Tone.Transport.stop()
+        Transport.stop()
         playing[0] = false
     }
 
@@ -223,19 +223,19 @@ function setOctave(e, num)
  {
      if (num===1) {
         synth.octaves = Number(e.target.value)
-        synths_i = new Tone.MembraneSynth(synth).toDestination();
+        synths_i = new MembraneSynth(synth).toDestination();
      }
      if (num===2) {
         synth.octaves = Number(e.target.value)
-        synths_j = new Tone.MembraneSynth(synth).toDestination();
+        synths_j = new MembraneSynth(synth).toDestination();
      }
      if (num===3) {
         synth.octaves = Number(e.target.value)
-        synths_k = new Tone.MembraneSynth(synth).toDestination();
+        synths_k = new MembraneSynth(synth).toDestination();
      }
      if (num===4) {
         synth.octaves = Number(e.target.value)
-        synths_l = new Tone.MembraneSynth(synth).toDestination();
+        synths_l = new MembraneSynth(synth).toDestination();
     }
 }
 
